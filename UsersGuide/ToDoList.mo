@@ -1,0 +1,19 @@
+within ThermalMatters.UsersGuide;
+class ToDoList "To-Do List for the ThermalMatters Library"
+  extends Modelica.Icons.Information;
+
+ annotation (preferredView = "info", Documentation(info= "<html><head></head><body><p>Examples:&nbsp;<br>- CryoHose&nbsp;<br></p><p>Components:&nbsp;<br>- Thermal Conductors at low-T: e.g., Bloch-Grüneisen&nbsp;<br>- Create LUT-based versions of HeatCap's and ThermCond's&nbsp;<br>- Other geometries (e.g., oblate, hyperbolic, toroidal, two-center)? Elements of 2D?</p><p>Functions:&nbsp;<br>- Finalize Frenkel EoS: f<sub>F</sub> is in general a function of T and P (parametrize viscosity and inf.-freq. shear mod.?)&nbsp;<br>- More general EoS's for non-isotropic materials&nbsp;<br>- G<sub>c</sub> functions for convection component&nbsp;</p><p>Numerics / Utilities:&nbsp;<br>- Switch from numerical integration to Chebyshev fits for Debye3 function <br>- Implement Fermi-Dirac integrals F<sub>-1/2</sub> F<sub>1/2</sub> F<sub>3/2</sub> , starting from their asymptotic forms&nbsp;</p><p>Data:&nbsp;<br>- Import (or link to) relavant physical values for different materials (CRC? NIST?)&nbsp;</p>
+</body></html>", revisions = "<html><head></head><body><table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+<tbody><tr><th>Date</th> <th align=\"left\">Description</th></tr>
+
+<tr><td>March 2026</td>
+    <td>
+
+<table border=\"0\">
+<tbody><tr><td>
+         Initial version implemented by T. Burch.<br></td></tr></tbody></table>
+</td></tr>
+
+</tbody></table>
+</body></html>"));
+end ToDoList;
