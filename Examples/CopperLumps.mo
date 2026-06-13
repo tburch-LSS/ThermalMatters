@@ -2,9 +2,9 @@ within ThermalMatters.Examples;
 
 model CopperLumps
   extends Modelica.Icons.Example;
-  Components.HeatCapacitors.DebyeSolid debyeSolid(T(start = 1), T_D(displayUnit = "K"), Mdens(displayUnit = "kg/m3"))  annotation(
+  Components.HeatCapacitors.DebyeSolid debyeSolid(T(start = 1, fixed = true), T_D= copper.T_D, Mdens= copper.Mdens, effAm = copper.effAm, V = 1/copper.Mdens)  annotation(
     Placement(transformation(origin = {-30, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
-  Components.HeatCapacitors.DebyeGruenSolid debyeGruenSolid(T(start = 1), T0(displayUnit = "K"), T_D(displayUnit = "K"), Mdens(displayUnit = "kg/m3"))  annotation(
+  Components.HeatCapacitors.DebyeGruenSolid debyeGruenSolid(T(start = 1, fixed = true), T0= copper.T0, T_D= copper.T_D, Mdens= copper.Mdens, effAm = copper.effAm, V = 1/copper.Mdens, alpha0 = copper.alpha0)  annotation(
     Placement(transformation(origin = {-30, -30}, extent = {{10, 10}, {-10, -10}}, rotation = 270)));
   Modelica.Thermal.HeatTransfer.Components.Convection convection_d annotation(
     Placement(transformation(origin = {10, 30}, extent = {{10, -10}, {-10, 10}}, rotation = 180)));
@@ -16,10 +16,12 @@ model CopperLumps
     Placement(transformation(origin = {10, -30}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Thermal.HeatTransfer.Sensors.RelTemperatureSensor relTemperatureSensor annotation(
     Placement(transformation(origin = {-10, 0}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
-  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor constCpSolid(T(start = 1, displayUnit = "K"), C = 385)  annotation(
+  Modelica.Thermal.HeatTransfer.Components.HeatCapacitor constCpSolid(T(start = 1, fixed = true, displayUnit = "K"), C = 385)  annotation(
     Placement(transformation(origin = {-30, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
   Modelica.Thermal.HeatTransfer.Components.Convection convection_c annotation(
     Placement(transformation(origin = {30, 70}, extent = {{-10, 10}, {10, -10}}, rotation = -0)));
+  Materials.Copper copper annotation(
+    Placement(transformation(origin = {90, 70}, extent = {{-10, -10}, {10, 10}})));
 equation
   connect(debyeSolid.port, convection_d.solid) annotation(
     Line(points = {{-20, 30}, {0, 30}}, color = {191, 0, 0}));
@@ -43,8 +45,7 @@ equation
     Line(points = {{40, 0}, {10, 0}, {10, 20}}, color = {0, 0, 127}));
   connect(const.y, convection_dg.Gc) annotation(
     Line(points = {{40, 0}, {10, 0}, {10, -20}}, color = {0, 0, 127}));
-
-annotation(preferredView = "model", 
+  annotation(preferredView = "model", 
     Diagram(coordinateSystem(extent = {{-40, 80}, {100, -40}})),
   experiment(StartTime = 0, StopTime = 300, Tolerance = 1e-06, Interval = 0.001),
   Documentation(info = "<html><head></head><body>A simple convective heating simulation of two copper masses, one with its heat capacity given via the Debye model (isotropic, harmonic), the other via the Debye-Grüneisen model (isotropic, slightly anharmonic). The heating model may be oversimplified, but the relevant properties of the solids are thereby revealed...<div><br></div><div>Looking at the specific heat capacities as functions of the temperature, we can see the correct T<sup>3</sup>-dependence at low temperatures, turning over to a constant at higher T:<br><div><br></div><img src=\"modelica://ThermalMatters/Examples/CopperLumps_cps_vs_T.png\"></div><div><br></div><div>Note the slightly higher c<sub>p</sub> values for the&nbsp;Debye-Grüneisen model, resulting in a higher temperature for the Debye model after the same amount of time:<br><div><br></div><div><img src=\"modelica://ThermalMatters/Examples/CopperLumps_DeltaT_vs_time.png\"></div><div><br></div><div>This results from the small anharmonicity in the interatomic potentials in the Debye-Grüneisen model (resulting in a non-zero thermal expansion coefficient,&nbsp;<span style=\"font-family: 'Ubuntu Sans';\">α</span>). According to Grüneisen's law, the <span style=\"font-family: 'Ubuntu Sans';\">α</span>/c<sub>p</sub> ratio is temperature-independent:</div><div><br></div><div><img src=\"modelica://ThermalMatters/Examples/CopperLumps_cp_alpha_vs_T.png\"></div><div><br></div></div><div><div>By comparison, the same mass with a constant heat capacity (taken as that of 1 kg of copper at room temperature: 385 J/K at 293 K) is 50 K cooler after the 3-minute heating simulation:</div><div><br></div><div><img src=\"modelica://ThermalMatters/Examples/CopperLumps_T_vs_time.png\"></div></div><div><br></div></body></html>", revisions = "<html><head></head><body><table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
