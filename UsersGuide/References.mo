@@ -1,0 +1,7 @@
+within ThermalMatters.UsersGuide;
+
+class References "References relevant for the ThermalMatters Library"
+  extends Modelica.Icons.References;
+  annotation(preferredView = "info", 
+    Documentation(info = "<html><head></head><body><div>Physics:&nbsp;<br><span style=\"font-family: 'Ubuntu Sans';\">Landau and Lifshitz, Statistical Physics Part 1 (3rd edition), 1980. [LLSP]&nbsp;</span></div><span style=\"font-family: 'Ubuntu Sans';\">Landau and Lifshitz, Fluid Mechanics, 19xx. [LLFM]&nbsp;</span><div>Riley, Hobson, and Bence, \"Mathematical Methods for Physics and Engineering (3rd Edition),\" 2006. [RHB]&nbsp;</div><div><br></div><div>Material Properties:</div><div>CRC Handbook. [CRC]&nbsp;</div><div><br></div><div>Numerics:&nbsp;<br><div>NIST Digital Library of Mathematical Functions,&nbsp;<a href=\"https://dlmf.nist.gov/\">https://dlmf.nist.gov/</a> . [DLMF]&nbsp;</div><div>Abramowitz and Stegun, \"Handbook of Mathematical Functions,\" 1964. [AS]&nbsp;</div></div><div>Gradshteyn and Ryzhik, \"Tables of Integrals, Series, and Products (7th edition),\" 2007. [GR]&nbsp;</div></body></html>"));
+end References;

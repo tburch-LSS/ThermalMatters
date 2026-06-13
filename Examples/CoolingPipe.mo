@@ -18,12 +18,14 @@ model CoolingPipe
     Placement(transformation(origin = {-50, 30}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.Constant outer_Gc(k = 2.e5)  annotation(
     Placement(transformation(origin = {70, 30}, extent = {{10, -10}, {-10, 10}}, rotation = -0)));
-  Components.ThermalConductors.WFcylShell wFcylShell(rb = 0.11, a = 0.00429, kappa0 = 237)  annotation(
+  Components.ThermalConductors.WFcylShell wFcylShell(rb = 0.11, a = alum.a, kappa0 = alum.kappa0, T0 = alum.T0)  annotation(
     Placement(transformation(origin = {10, -30}, extent = {{-10, -10}, {10, 10}})));
-  Components.CompositeObjects.DebyeWFPipe debyeWFPipe(rout = 0.11, T_start = 0.5*(Tout + Tin), T_D = 428, effAm = 26.982, Mdens = 2699, kappa0 = 237, a = 0.00429)  annotation(
+  Components.CompositeObjects.DebyeWFPipe debyeWFPipe(rout = 0.11, T_start = 0.5*(Tout + Tin), T_D = alum.T_D, effAm = alum.effAm, Mdens = alum.Mdens, kappa0 = alum.kappa0, a = alum.a, T0 = alum.T0)  annotation(
     Placement(transformation(origin = {10, 10}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.Ramp rampT(height = 73, duration = 0.5, offset = Tin, startTime = 2)  annotation(
     Placement(transformation(origin = {-110, -10}, extent = {{-10, -10}, {10, 10}})));
+  Materials.Aluminum alum annotation(
+    Placement(transformation(origin = {-110, 30}, extent = {{-10, -10}, {10, 10}})));
 equation
   connect(inner_Temp.port, inner_convect.fluid) annotation(
     Line(points = {{-60, -10}, {-38, -10}}, color = {191, 0, 0}));
