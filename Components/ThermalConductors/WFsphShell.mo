@@ -15,10 +15,11 @@ model WFsphShell "Wiedemann-Franz conducting spherical shell"
   // parameter SI.Conductivity sigma0 = 59.6e6 "S/m; Electrical conductivity";
   parameter SI.ThermalConductivity kappa0 = 401 "W/(m K); Thermal conductivity at T0";
   parameter SI.Temperature T0(displayUnit = "K") = 293 "K; Reference temperature";
-  parameter SI.LinearTemperatureCoefficient a = 4.04e-3 "1/K; Resistivity T coefficient";
+  parameter SI.LinearTemperatureCoefficient a0 = 4.04e-3 "1/K; Resistivity T coefficient";
+  parameter SI.Temperature Tkmax(displayUnit = "K")=10 "Temperature of max kappa (K)";
 equation
   (T, g) = Functions.poissonSph(port_a.T, port_b.T, ra, rb);
-  (kappa, sigma) = Functions.wfCond(T, kappa0, T0, a);
+  (kappa, sigma) = Functions.wfCond(T, kappa0, T0, a0, Tkmax);
   G = g * kappa;
   Q_flow = G * dT;
   annotation(

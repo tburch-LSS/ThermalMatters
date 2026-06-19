@@ -9,7 +9,9 @@ record Copper
   parameter SI.CubicExpansionCoefficient alpha0 = 16.64e-6 "1/K ; Thermal expansion coefficient";
   parameter SI.ThermalConductivity kappa0 = 401 "W/(m K); Thermal conductivity at T0";
   parameter SI.Temperature T0(displayUnit = "K") = 293 "K; Reference temperature";
-  parameter SI.LinearTemperatureCoefficient a = 4.04e-3 "1/K; Resistivity T coefficient";
-  parameter SI.Conductivity sigma0 = 59.6e6 "S/m; Electrical conductivity";annotation(
+  parameter SI.LinearTemperatureCoefficient a0 = 4.04e-3 "1/K; Resistivity T coefficient";
+  parameter SI.Temperature Tkmax(displayUnit = "K") = 10 "K; Temperature of max kappa";
+  parameter SI.Conductivity sigma0 = 59.6e6 "S/m; Electrical conductivity";
+  annotation(
     Documentation(info = "<html><head></head><body>Material characteristics for Copper.</body></html>"));
 end Copper;
