@@ -2,8 +2,11 @@ within ThermalMatters.Examples;
 
 model CopperLumps
   extends Modelica.Icons.Example;
-  Modelica.Units.SI.ThermalConductivity kappa;
-  Modelica.Units.SI.Conductivity sigma;
+  import Modelica.Units.SI;
+  SI.ThermalConductivity kappa,kap_wf;
+  SI.Conductivity sigma, sig_wf;
+  SI.EnergyDensity e0,e;
+  SI.SpecificHeatCapacity cp0,cp;
   Components.HeatCapacitors.DebyeSolid debyeSolid(T(start = 1, fixed = true), T_D= copper.T_D, Mdens= copper.Mdens, effAm = copper.effAm, V = 1/copper.Mdens)  annotation(
     Placement(transformation(origin = {-30, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 90)));
   Components.HeatCapacitors.DebyeGruenSolid debyeGruenSolid(T(start = 1, fixed = true), T0= copper.T0, T_D= copper.T_D, Mdens= copper.Mdens, effAm = copper.effAm, V = 1/copper.Mdens, alpha0 = copper.alpha0)  annotation(
@@ -25,7 +28,10 @@ model CopperLumps
   Materials.Copper copper annotation(
     Placement(transformation(origin = {90, 70}, extent = {{-10, -10}, {10, 10}})));
 equation
-  (kappa,sigma) = Functions.wfCond(debyeSolid.T,copper.kappa0,copper.T0,copper.a0,copper.Tkmax);
+  (e0,cp0) = Functions.debyeEoS(copper.T0,copper.T_D,copper.effAm,copper.Mdens);
+  (e,cp) = Functions.debyeEoS(debyeSolid.T,copper.T_D,copper.effAm,copper.Mdens);
+  (kap_wf,sig_wf) = Functions.wfCond(debyeSolid.T,copper.kappa0,copper.T0);
+  (kappa,sigma) = Functions.ktCond(debyeSolid.T,copper.kappa0,copper.T0,cp/cp0);
   connect(debyeSolid.port, convection_d.solid) annotation(
     Line(points = {{-20, 30}, {0, 30}}, color = {191, 0, 0}));
   connect(debyeGruenSolid.port, convection_dg.solid) annotation(

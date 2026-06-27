@@ -2,6 +2,7 @@ debyeEoS
 debyeGruenEoS
 frenkelEoS
 wfCond
+ktCond
 poissonWall
 poissonCyl
 poissonSph

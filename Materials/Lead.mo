@@ -10,7 +10,7 @@ record Lead
   parameter SI.ThermalConductivity kappa0 = 35.3 "W/(m K); Thermal conductivity at T0";
   parameter SI.Temperature T0(displayUnit = "K") = 293 "K; Reference temperature";
   parameter SI.LinearTemperatureCoefficient a0 = 3.9e-3 "1/K; Resistivity T coefficient";
-  parameter SI.Temperature Tkmax(displayUnit = "K") = 10 "K; Temperature of max kappa";
+  parameter SI.Temperature Tkmax(displayUnit = "K") = 2 "K; Temperature of max kappa";
   parameter SI.Conductivity sigma0 = 4.81e6 "S/m; Electrical conductivity";
   annotation(
     Documentation(info = "<html><head></head><body>Material characteristics for Lead.</body></html>"));

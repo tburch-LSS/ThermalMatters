@@ -13,21 +13,18 @@ model DebyeWFPipe "Debye-Mass WF-Conducting Cylindrical Shell"
   parameter SI.Temperature T_D (displayUnit = "K")= 343 "K ; Debye Temperature";
   parameter Real effAm = 63.546 "Da ; Effective atomic mass";
   parameter SI.Density Mdens (displayUnit = "kg/m3")= 8935 "kg/m^3 ; Mass density";
-  // parameter Real L = 2.44e-8 "V^2 K^-2; Lorenz number";
-  // parameter SI.Conductivity sigma0 = 59.6e6 "S/m; Electrical conductivity";
   parameter SI.ThermalConductivity kappa0 = 401 "W/(m K); Thermal conductivity at T0";
   parameter SI.Temperature T0(displayUnit = "K") = 293 "K; Reference temperature";
-  parameter SI.LinearTemperatureCoefficient a0 = 4.04e-3 "1/K; Resistivity T coefficient";
-  parameter SI.Temperature Tkmax(displayUnit = "K")=10 "Temperature of max kappa (K)";
+  // parameter SI.Temperature Tkmax(displayUnit = "K")=10 "Temperature of max kappa (K)";
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port_a annotation(
     Placement(transformation(origin = {-60, 0}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b port_b annotation(
     Placement(transformation(origin = {60, 0}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {100, 0}, extent = {{-10, -10}, {10, 10}})));
   HeatCapacitors.DebyeSolid debyeSolid(V = V, T(start = T_start, fixed = true), T_D = T_D, effAm = effAm, Mdens = Mdens)  annotation(
     Placement(transformation(origin = {0, 10}, extent = {{-10, -10}, {10, 10}})));
-  ThermalConductors.WFcylShell wFcylShell_a(ra = rin, rb = rhalf, l = l, kappa0 = kappa0, T0 = T0, a0 = a0, Tkmax= Tkmax)  annotation(
+  ThermalConductors.WFcylShell wFcylShell_a(ra = rin, rb = rhalf, l = l, kappa0 = kappa0, T0 = T0)  annotation(
     Placement(transformation(origin = {-30, 0}, extent = {{-10, -10}, {10, 10}})));
-  ThermalConductors.WFcylShell wFcylShell_b(ra = rhalf, rb = rout, l = l, kappa0 = kappa0, T0 = T0, a0 = a0, Tkmax = Tkmax)  annotation(
+  ThermalConductors.WFcylShell wFcylShell_b(ra = rhalf, rb = rout, l = l, kappa0 = kappa0, T0 = T0)  annotation(
     Placement(transformation(origin = {30, 0}, extent = {{-10, -10}, {10, 10}})));
 equation
   connect(port_a, wFcylShell_a.port_a) annotation(
